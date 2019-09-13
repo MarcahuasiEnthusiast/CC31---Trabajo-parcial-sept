@@ -3,6 +3,7 @@
 #include "Objeto.hpp"
 #include "Enemigo.hpp"
 #include "Personaje.hpp"
+#include "Listas.hpp"
 
 class ColeccionEnemigos : public Enemigo
 {

@@ -2,6 +2,7 @@
 
 #include "Objeto.hpp"
 #include "Bala.hpp"
+#include "Listas.hpp"
 
 class ColeccionBala : public Bala
 {
