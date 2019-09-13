@@ -16,8 +16,9 @@ using namespace System::Drawing;
 
 //TODOS HEREDAN DE LA CLASE OBJETO
 
+//ESTO ES UNA PRUEBA DE GITHUB PAPA
 
-class Objeto
+class Objeto 
 
 {
 protected:

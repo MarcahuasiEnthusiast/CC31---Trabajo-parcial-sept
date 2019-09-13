@@ -11,9 +11,6 @@ private:
 
 	int tamaño;
 
-
-
-
 	Rectangle sVisible;
 	Rectangle C;
 
