@@ -9,6 +9,8 @@
 #include "Personaje.hpp"
 #include  "ColeccionEnemigos.hpp"
 #include "ColeccionBala.hpp"
+#include "ColeccionMunicion.hpp"
+#include "Barras.hpp"
 
 namespace TF_Progra2 {
 
@@ -26,7 +28,7 @@ namespace TF_Progra2 {
 	public ref class FrmNivel1 : public System::Windows::Forms::Form
 	{
 	public:
-		SoundPlayer^ musica = gcnew SoundPlayer("Battle.wav");
+		
 		FrmNivel1(void)
 		{
 			InitializeComponent();
@@ -42,7 +44,8 @@ namespace TF_Progra2 {
 			Ju = new Jugador();
 			CE = new ColeccionEnemigos();
 			CB = new ColeccionBala();
-	
+			CM = new ColeccionMunicion();
+			BM = new BarraMunicion();
 
 
 			//
@@ -70,6 +73,8 @@ namespace TF_Progra2 {
 		ColeccionEnemigos * CE;
 		ColeccionBala * CB;
 		Jugador * Ju;
+		ColeccionMunicion* CM;
+		BarraMunicion* BM;
 		
 		bool n;
 
@@ -196,7 +201,9 @@ namespace TF_Progra2 {
 		tiempoDibujar();
 		nivelDibujar();
 
-
+		CM->DibujarMunicion(bg);
+		BM->DibujarBarra1(bg);
+		
 
 		CB->MoverBalas();
 		CB->DibujarBalas(bg);
@@ -205,6 +212,7 @@ namespace TF_Progra2 {
 		CE->DibujarEnemigos(bg);
 
 
+		ImpactoMunicion();
 		ImpactoBala();
 		ImpactoEnemigo();
 		CE->destruir(Ju);
@@ -256,21 +264,22 @@ namespace TF_Progra2 {
 
 		//////Adicional
 
-		if ((e->KeyCode == Keys::B) )
-		{
+		//if ((e->KeyCode == Keys::B) )
+		//{
 
-			clasebala = 1;
-		}
-		if ((e->KeyCode == Keys::N) )
-		{
+		//	clasebala = 1;
+		//}
+		//if ((e->KeyCode == Keys::N) )
+		//{
 
-			clasebala = 2;
-		}
-		if ((e->KeyCode == Keys::M) )
-		{
+		//	clasebala = 2;
+		//}
+		//if ((e->KeyCode == Keys::M) )
+		//{
 
-			clasebala = 3;
-		}
+		//	clasebala = 3;
+		//}
+		///Esto ya es tarea de pilas y colas
 
 
 	}
@@ -299,10 +308,13 @@ namespace TF_Progra2 {
 
 
 private: System::Void panel1_MouseClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
-	CB->CrearBala(clasebala , Ju->getx() + Ju->getanchoI()/2, Ju->gety() +Ju->getaltoI() / 2, nivel);
-	CB->SetAngulos(e->X, e->Y);
-
-
+	if (BM->TamañoBarra() != 0)
+	{
+		CB->CrearBala(BM->Pop(), Ju->getx() + Ju->getanchoI() / 2, Ju->gety() + Ju->getaltoI() / 2, nivel);
+		BM->PopErase();
+		CB->SetAngulos(e->X, e->Y);
+	}
+	
 	
 }
 
@@ -489,9 +501,9 @@ void tiempoDibujar()
 
 	 System::Drawing::Font ^ f = gcnew System::Drawing::Font("Arial", 25);
 
-	 bg->Graphics->DrawRectangle(Pens::Green, MAX_X - 100, 0, 100, 50);
-	 bg->Graphics->FillRectangle(Brushes::White, MAX_X - 100, 0, 104, 50);
-	 bg->Graphics->DrawString(a, f, Brushes::Black, MAX_X - 100, 0);
+	 bg->Graphics->DrawRectangle(Pens::Green, MAX_X - 100, MAX_Y - 50, 100, 50);
+	 bg->Graphics->FillRectangle(Brushes::White, MAX_X - 100, MAX_Y - 50, 104, 50);
+	 bg->Graphics->DrawString(a, f, Brushes::Black, MAX_X - 100, MAX_Y - 50);
 }
 
 
@@ -502,9 +514,9 @@ void nivelDibujar()
 
 	System::Drawing::Font ^ f = gcnew System::Drawing::Font("Arial", 25);
 
-	bg->Graphics->DrawRectangle(Pens::Green, 0, 0, 130, 50);
-	bg->Graphics->FillRectangle(Brushes::White, 0, 0, 130, 50);
-	bg->Graphics->DrawString(a, f, Brushes::Black, 0, 0);
+	bg->Graphics->DrawRectangle(Pens::Green, 0, MAX_Y - 50, 130, 50);
+	bg->Graphics->FillRectangle(Brushes::White, 0, MAX_Y - 50, 130, 50);
+	bg->Graphics->DrawString(a, f, Brushes::Black, 0, MAX_Y - 50);
 }
 
 
@@ -534,8 +546,37 @@ void Perder()
 private: System::Void FrmNivel1_Load(System::Object^  sender, System::EventArgs^  e) {
 	velP = Ju->getdx();
 	velPn = Ju->getdx()*-1;
-	//musica->Play();
+
 }
+
+
+
+
+		 ///////////////////////////////////////////////////////
+		 /////////////////////////////////////////////////////
+		 ////////////////////////////////////////////////////
+
+
+		 void ImpactoMunicion()
+		 {
+			 for (int i = 0; i < CM->cantidadMunicion(); i++)
+			 {
+				 if (CM->RectanguloMun(i).IntersectsWith(Ju->RectanguloJu()))
+				 {
+
+					 BM->Push(CM->ReturnMun(i).gettipo());
+					 CM->EliminarMun(i);
+					 
+				 }
+			 }
+
+
+			
+		 }
+
+
+
+		
 
 };
 }
