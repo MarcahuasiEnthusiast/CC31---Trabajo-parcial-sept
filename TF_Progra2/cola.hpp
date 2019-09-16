@@ -7,7 +7,7 @@ class cola {
 		Node* next;
 		C elem;
 
-		Node(C elem) : next(next) { }
+		Node(C elem) : next(next), elem(elem) { }
 	};
 
 	Node* head;
