@@ -16,7 +16,7 @@ class list {
 	Node* inicial;
 	Node* final;
 	T len;
-	
+
 public:
 	list() : inicial(nullptr), final(nullptr), len(0) { }
 	~list() {
