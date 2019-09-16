@@ -10,13 +10,13 @@ class list {
 		Node* next;
 		T element;
 
-		Node(float elem, Node* next = nullptr) : element(elem), next(next) { }
+		Node(T elem, Node* next = nullptr) : element(elem), next(next) { }
 	};
 
 	Node* inicial;
 	Node* final;
 	T len;
-
+	
 public:
 	list() : inicial(nullptr), final(nullptr), len(0) { }
 	~list() {
