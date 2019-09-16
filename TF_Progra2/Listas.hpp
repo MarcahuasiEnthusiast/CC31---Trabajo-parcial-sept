@@ -1,19 +1,21 @@
 #pragma once
+#include <iostream>
+
 
 // tenemos que modificar estos metodos para que funcione con los enemigos, balas, pilas y colas (esto es solo una base)
-
+template <typename T>
 class list {
 
 	struct Node {
 		Node* next;
-		float element;
+		T element;
 
 		Node(float elem, Node* next = nullptr) : element(elem), next(next) { }
 	};
 
 	Node* inicial;
 	Node* final;
-	int len;
+	T len;
 
 public:
 	list() : inicial(nullptr), final(nullptr), len(0) { }
@@ -25,21 +27,21 @@ public:
 		}
 	}
 
-	void AddFirst(float elem) {
+	void AddFirst(T elem) {
 		Node* nuevo = new Node(elem);
 		nuevo->next = inicial;
 		inicial = nuevo;
 		++len;
 	}
 
-	void AddLast(float elem) {
+	void AddLast(T elem) {
 		Node* nuevo = new Node(elem);
 		nuevo->next = final;
 		final = nuevo;
 		++len;
 	}
 
-	int Find_Elem(float elem) {
+	int Find_Elem(T elem) {
 		Node* aux = inicial;
 		int pos = 0;
 		while (aux != nullptr) {
@@ -61,7 +63,7 @@ public:
 		}
 	}
 
-	void Add_in_pos(float pos, float elem) {
+	void Add_in_pos(T pos, T elem) {
 		if (pos < 0 || pos >= len) return;
 		if (pos == 0) {
 			AddFirst(elem);
@@ -78,7 +80,7 @@ public:
 		}
 	}
 
-	void Remove_in_pos(float pos, float elem) { 
+	void Remove_in_pos(T pos, T elem) { 
 		if (pos < 0 || pos >= len) return;
 		if (pos == 0) {
 			RemoveFirst();
