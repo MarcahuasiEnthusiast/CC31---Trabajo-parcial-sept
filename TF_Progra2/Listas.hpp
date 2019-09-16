@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-// tenemos que modificar estos metodos para que funcione con los enemigos, balas, pilas y colas (esto es solo una base)
+// tenemos que modificar estos metodos para que funcione con los enemigos, balas, pilas y colas (esto es solo una base))
 template <typename T>
 class list {
 
