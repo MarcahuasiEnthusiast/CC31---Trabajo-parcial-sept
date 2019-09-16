@@ -3,13 +3,14 @@
 #include "Objeto.hpp"
 #include "Enemigo.hpp"
 #include "Personaje.hpp"
-#include "Listas.hpp"
+
+#include "Lista.hpp"
+
 
 class ColeccionEnemigos : public Enemigo
 {
 private:
-	vector <Enemigo> En;
-
+	list <Enemigo> * En = new list <Enemigo>;
 
 public:
 
@@ -17,7 +18,7 @@ public:
 	{
 		for (int i = 0; i < 6; ++i)
 		{
-			En.push_back(Enemigo());
+			En->agregaInicial(Enemigo());
 		}
 	}
 
@@ -27,21 +28,21 @@ public:
 		{
 			for (int i = 0; i < 8; ++i)
 			{
-				En.push_back(Enemigo(niv));
+				En->agregaInicial(Enemigo(niv));
 			}
 		}
 		else if (niv == 2)
 		{
 			for (int i = 0; i < 10; ++i)
 			{
-				En.push_back(Enemigo(niv));
+				En->agregaInicial(Enemigo(niv));
 			}
 		}
 		else if (niv == 3)
 		{
 			for (int i = 0; i < 12; ++i)
 			{
-				En.push_back(Enemigo(niv));
+				En->agregaInicial(Enemigo(niv));
 			}
 		}
 
@@ -53,9 +54,9 @@ public:
 	{
 		Bitmap^ sprite;
 
-		for (int i = 0; i < En.size(); ++i)
+		for (int i = 0; i < En->longitud(); ++i)
 		{
-			switch (En[i].getclase())
+			switch (En->obtenerPos(i).getclase())
 			{
 			case 2:
 				sprite = gcnew Bitmap("enemigo2.png");
@@ -67,7 +68,7 @@ public:
 			default:		break;
 			}
 
-			En[i].DibujarE(bg, sprite);
+			En->obtenerPos(i).DibujarE(bg, sprite);
 		}
 
 	}
@@ -75,45 +76,45 @@ public:
 
 	int cantidadEnemigos()
 	{
-		return En.size();
+		return En->longitud();
 
 	}
 
 	void MoverEnemigos()
 	{
-		for (int i = 0; i < En.size(); ++i)
+		for (int i = 0; i < En->longitud(); ++i)
 		{
-			En[i].MoverE();
+			En->obtenerPos(i).MoverE();
 		}
 	}
 
 	void EliminarE(int k)
 	{
-		En.erase(En.begin() + k);
+		En->eliminaPos(k);
 	}
 
 	int TamañoE()
 	{
-		return En.size();
+		return En->longitud();
 	}
 
-	Rectangle RectanguloEn(int l)
+	Rectangle RectanguloEn(int i)
 	{
-		return Rectangle(En[l].getx(), En[l].gety(), En[l].getancho(), En[l].getalto());
+		return Rectangle(En->obtenerPos(i).getx(), En->obtenerPos(i).gety(), En->obtenerPos(i).getancho(), En->obtenerPos(i).getalto());
 	}
 
 	Enemigo ReturnEnemigo(int l)
 	{
-		return En.at(l);
+		return En->obtenerPos(l);
 	}
 
 	void destruir(Jugador* Ju)
 	{
-		for (int i = 0; i < En.size(); ++i)
+		for (int i = 0; i < En->longitud(); ++i)
 		{
-			if (En[i].getsalud2() <= 0)
+			if (En->obtenerPos(i).getsalud2() <= 0)
 			{
-				En.erase(En.begin() + i);
+				En->eliminaPos(i);
 				Ju->setsalud(Ju->getsalud() + 50);
 
 			}
@@ -122,26 +123,26 @@ public:
 
 	void SetSalud(int i, int nuevo)
 	{
-		En[i].setsalud2(nuevo);
+		En->obtenerPos(i).setsalud2(nuevo);
 	}
 
 	int GetSalud(int i)
 	{
-		return En[i].getsalud2();
+		return En->obtenerPos(i).getsalud2();
 	}
 
 	void SetContador(int i, int nuevo)
 	{
-		En[i].setcontador(nuevo);
+		En->obtenerPos(i).setcontador(nuevo);
 	}
 
 	int GetCademcia(int i)
 	{
-		return En[i].getcadencia();
+		return En->obtenerPos(i).getcadencia();
 	}
 
 	int GetContador(int i)
 	{
-		return En[i].getcontador();
+		return En->obtenerPos(i).getcontador();
 	}
 };
