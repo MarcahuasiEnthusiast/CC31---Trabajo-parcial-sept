@@ -49,7 +49,6 @@ public:
 
 	}
 
-
 	void DibujarEnemigos(BufferedGraphics^ bg)
 	{
 		Bitmap^ sprite;
