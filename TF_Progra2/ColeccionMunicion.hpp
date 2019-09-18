@@ -6,39 +6,39 @@
 class ColeccionMunicion : public Municion
 {
 private:
-	vector <Municion> Mu;
+	list <Municion*>* Mu = new list <Municion*>;
 
 public:
 
 	ColeccionMunicion()
 	{
-		for (int i = 0; i < 6; ++i)
+		for (int i = 0; i < 18; ++i)
 		{
-			Mu.push_back(Municion());
+			Mu->agregaInicial(new Municion());
 		}
 	}
 
-	void crearColeccionEnemigos(int niv)
+	void crearColeccionMun(int niv)
 	{
 		if (niv == 1)
 		{
-			for (int i = 0; i < 8; ++i)
+			for (int i = 0; i < 18; ++i)
 			{
-				Mu.push_back(Municion());
+				Mu->agregaInicial(new Municion());
 			}
 		}
 		else if (niv == 2)
 		{
-			for (int i = 0; i < 10; ++i)
+			for (int i = 0; i < 20; ++i)
 			{
-				Mu.push_back(Municion());
+				Mu->agregaInicial(new Municion());
 			}
 		}
 		else if (niv == 3)
 		{
-			for (int i = 0; i < 12; ++i)
+			for (int i = 0; i < 22; ++i)
 			{
-				Mu.push_back(Municion());
+				Mu->agregaInicial(new Municion());
 			}
 		}
 
@@ -50,9 +50,9 @@ public:
 	{
 		Bitmap^ sprite;
 
-		for (int i = 0; i < Mu.size(); ++i)
+		for (int i = 0; i < Mu->longitud(); ++i)
 		{
-			switch (Mu[i].gettipo())
+			switch (Mu->obtenerPos(i)->gettipo())
 			{
 			case 1:
 				sprite = gcnew Bitmap("bala1.png");
@@ -63,35 +63,43 @@ public:
 			case 3:
 				sprite = gcnew Bitmap("bala3.png");
 				break;
+			case 4:
+				sprite = gcnew Bitmap("cora.png");
+				break;
+			case 5:
+				sprite = gcnew Bitmap("burguer.png");
+				break;
+			case 6:
+				sprite = gcnew Bitmap("pocion.png");
+				break;
 
 			default:		break;
 			}
 
-			Mu[i].dibujarMun(bg, sprite);
+			Mu->obtenerPos(i)->dibujarMun(bg, sprite);
 		}
-
 	}
 
 
 	int cantidadMunicion()
 	{
-		return Mu.size();
+		return Mu->longitud();
 
 	}
 
 	void EliminarMun(int k)
 	{
-		Mu.erase(Mu.begin() + k);
+		Mu->eliminaPos(k);
 	}
 
-	Rectangle RectanguloMun(int l)
+	Rectangle RectanguloMun(int i)
 	{
-		return Rectangle(Mu[l].getx(), Mu[l].gety(), Mu[l].getancho(), Mu[l].getalto());
+		return Rectangle(Mu->obtenerPos(i)->getx(), Mu->obtenerPos(i)->gety(), Mu->obtenerPos(i)->getancho(), Mu->obtenerPos(i)->getalto());
 	}
 
-	Municion ReturnMun(int l)
+	Municion* ReturnMun(int l)
 	{
-		return Mu.at(l);
+		return Mu->obtenerPos(l);
 	}
 
 

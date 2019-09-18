@@ -10,7 +10,7 @@
 class ColeccionEnemigos : public Enemigo
 {
 private:
-	list <Enemigo> * En = new list <Enemigo>;
+	list <Enemigo*>* En = new list <Enemigo*>;
 
 public:
 
@@ -18,7 +18,7 @@ public:
 	{
 		for (int i = 0; i < 6; ++i)
 		{
-			En->agregaInicial(Enemigo());
+			En->agregaInicial(new Enemigo());
 		}
 	}
 
@@ -28,21 +28,21 @@ public:
 		{
 			for (int i = 0; i < 8; ++i)
 			{
-				En->agregaInicial(Enemigo(niv));
+				En->agregaInicial(new Enemigo(niv));
 			}
 		}
 		else if (niv == 2)
 		{
 			for (int i = 0; i < 10; ++i)
 			{
-				En->agregaInicial(Enemigo(niv));
+				En->agregaInicial(new Enemigo(niv));
 			}
 		}
 		else if (niv == 3)
 		{
 			for (int i = 0; i < 12; ++i)
 			{
-				En->agregaInicial(Enemigo(niv));
+				En->agregaInicial(new Enemigo(niv));
 			}
 		}
 
@@ -55,7 +55,7 @@ public:
 
 		for (int i = 0; i < En->longitud(); ++i)
 		{
-			switch (En->obtenerPos(i).getclase())
+			switch (En->obtenerPos(i)->getclase())
 			{
 			case 2:
 				sprite = gcnew Bitmap("enemigo2.png");
@@ -67,7 +67,7 @@ public:
 			default:		break;
 			}
 
-			En->obtenerPos(i).DibujarE(bg, sprite);
+			En->obtenerPos(i)->DibujarE(bg, sprite);
 		}
 
 	}
@@ -83,7 +83,7 @@ public:
 	{
 		for (int i = 0; i < En->longitud(); ++i)
 		{
-			En->obtenerPos(i).MoverE();
+			En->obtenerPos(i)->MoverE();
 		}
 	}
 
@@ -99,10 +99,10 @@ public:
 
 	Rectangle RectanguloEn(int i)
 	{
-		return Rectangle(En->obtenerPos(i).getx(), En->obtenerPos(i).gety(), En->obtenerPos(i).getancho(), En->obtenerPos(i).getalto());
+		return Rectangle(En->obtenerPos(i)->getx(), En->obtenerPos(i)->gety(), En->obtenerPos(i)->getancho(), En->obtenerPos(i)->getalto());
 	}
 
-	Enemigo ReturnEnemigo(int l)
+	Enemigo* ReturnEnemigo(int l)
 	{
 		return En->obtenerPos(l);
 	}
@@ -111,7 +111,7 @@ public:
 	{
 		for (int i = 0; i < En->longitud(); ++i)
 		{
-			if (En->obtenerPos(i).getsalud2() <= 0)
+			if (En->obtenerPos(i)->getsalud2() <= 0)
 			{
 				En->eliminaPos(i);
 				Ju->setsalud(Ju->getsalud() + 50);
@@ -122,26 +122,26 @@ public:
 
 	void SetSalud(int i, int nuevo)
 	{
-		En->obtenerPos(i).setsalud2(nuevo);
+		En->obtenerPos(i)->setsalud2(nuevo);
 	}
 
 	int GetSalud(int i)
 	{
-		return En->obtenerPos(i).getsalud2();
+		return En->obtenerPos(i)->getsalud2();
 	}
 
 	void SetContador(int i, int nuevo)
 	{
-		En->obtenerPos(i).setcontador(nuevo);
+		En->obtenerPos(i)->setcontador(nuevo);
 	}
 
 	int GetCademcia(int i)
 	{
-		return En->obtenerPos(i).getcadencia();
+		return En->obtenerPos(i)->getcadencia();
 	}
 
 	int GetContador(int i)
 	{
-		return En->obtenerPos(i).getcontador();
+		return En->obtenerPos(i)->getcontador();
 	}
 };
