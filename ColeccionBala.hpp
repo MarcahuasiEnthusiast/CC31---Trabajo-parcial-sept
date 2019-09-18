@@ -6,7 +6,7 @@
 class ColeccionBala : public Bala
 {
 private:
-	list <Bala>* Balas = new list <Bala>;
+	list <Bala*>  * Balas = new list <Bala*>;
 
 
 	//IGUAL QUE BALA PERO EN VECTOR
@@ -21,14 +21,14 @@ public:
 	{
 		for (int i = 0; i < 2; ++i)
 		{
-			Balas->agregaInicial(Bala(t, x, y, nivel));
+			Balas->agregaInicial(new Bala(t, x, y, nivel));
 		}
 	}
 
 	void CrearBala(int t, int x, int y, int nivel)
 	{
 
-		Balas->agregaInicial(Bala(t, x, y, nivel));
+		Balas->agregaInicial(new Bala(t, x, y, nivel));
 
 
 	}
@@ -40,28 +40,28 @@ public:
 
 		for (int i = 0; i < Balas->longitud(); ++i)
 		{
-			if (Balas->obtenerPos(i).gettipo() == 1)
+			if (Balas->obtenerPos(i)->gettipo() == 1)
 			{
 				sprite = gcnew Bitmap("bala1.png");
 			}
-			else if (Balas->obtenerPos(i).gettipo() == 2)
+			else if (Balas->obtenerPos(i)->gettipo() == 2)
 			{
 				sprite = gcnew Bitmap("bala2.png");
 			}
-			else if (Balas->obtenerPos(i).gettipo() == 3)
+			else if (Balas->obtenerPos(i)->gettipo() == 3)
 			{
 				sprite = gcnew Bitmap("bala3.png");
 			}
-			else if (Balas->obtenerPos(i).gettipo() == 4)
+			else if (Balas->obtenerPos(i)->gettipo() == 4)
 			{
 				sprite = gcnew Bitmap("bala4.png");
 			}
-			else if (Balas->obtenerPos(i).gettipo() == 5)
+			else if (Balas->obtenerPos(i)->gettipo() == 5)
 			{
 				sprite = gcnew Bitmap("bala5.png");
 			}
 
-			Balas->obtenerPos(i).dibujarBala(bg, sprite);
+			Balas->obtenerPos(i)->dibujarBala(bg, sprite);
 
 		}
 
@@ -70,13 +70,13 @@ public:
 	{
 		for (int i = 0; i < Balas->longitud(); ++i)
 		{
-			Balas->obtenerPos(i).mover();
+			Balas->obtenerPos(i)->mover();
 		}
 	}
 
 	void SetAngulos(int nx, int ny)
 	{
-		Balas->obtenerPos(Balas->longitud() - 1).setAngulo(nx, ny);
+		Balas->obtenerPos(0)->setAngulo(nx, ny);
 	}
 
 	void EliminarB(int k)
@@ -91,33 +91,33 @@ public:
 
 	Rectangle RectanguloBa(int i)
 	{
-		return Rectangle(Balas->obtenerPos(i).getx(), Balas->obtenerPos(i).gety(), Balas->obtenerPos(i).getancho(), Balas->obtenerPos(i).getalto());
+		return Rectangle(Balas->obtenerPos(i)->getx(), Balas->obtenerPos(i)->gety(), Balas->obtenerPos(i)->getancho(), Balas->obtenerPos(i)->getalto());
 	}
 
-	Bala returnBala(int m)
+	Bala * returnBala(int m)
 	{
 		return Balas->obtenerPos(m);
 	}
 
 	void SetChoque(int i)
 	{
-		Balas->obtenerPos(i).setchoque(1);
+		Balas->obtenerPos(i)->setchoque(1);
 	}
 
 	int GetChoque(int i)
 	{
-		return Balas->obtenerPos(i).getchoque();
+		return Balas->obtenerPos(i)->getchoque();
 	}
 
 	int GetClase(int i)
 	{
-		return Balas->obtenerPos(i).getclase();
+		return Balas->obtenerPos(i)->getclase();
 	}
 
 
 
 	void SetDaño(int i, int j)
 	{
-		Balas->obtenerPos(i).setdaño(j);
+		Balas->obtenerPos(i)->setdaño(j);
 	}
 };
