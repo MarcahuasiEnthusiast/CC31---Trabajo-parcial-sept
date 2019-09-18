@@ -6,7 +6,7 @@
 
 using namespace std;
 
-// tenemos que modificar estos metodos para que funcione con los enemigos, balas, pilas y colas (esto es solo una base)
+
 template <typename T>
 class list {
 
@@ -70,6 +70,17 @@ public:
 	}
 
 
+	T accederPos(int pos) {
+		if (pos >= 0 && pos < len) {
+			Node* aux = inicial;
+			for (int i = 0; i < pos; i++) {
+				aux = aux->next;
+			}
+			return aux->element;
+		}
+	}
+
+
 	int longitud() {
 		return len;
 	}
@@ -103,16 +114,18 @@ public:
 
 	void eliminaPos(int pos) {
 		if (pos < 0 || pos >= len) return;
-		/*if (pos == 0) {
+		if (pos == 0) {
 			eliminarInicial();
-		}*/
+		}
 		else {
 			Node* aux = inicial;
+			Node* aux2 = inicial;
 			for (int i = 0; i < pos - 1; ++i) {
 				aux = aux->next;
 			}
-			Node* aux2 = aux->next;
+			aux2 = aux->next;
 			aux->next = aux2->next;
+
 			delete aux2;
 			--len;
 		}
