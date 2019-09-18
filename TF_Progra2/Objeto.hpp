@@ -10,6 +10,9 @@
 #define MAX_X 1280
 #define MAX_Y 840
 
+#define MIN_X 2
+#define MIN_Y 60
+
 using namespace std;
 using namespace System;
 using namespace System::Drawing;
@@ -18,7 +21,7 @@ using namespace System::Drawing;
 
 //ESTO ES UNA PRUEBA DE GITHUB PAPA
 
-class Objeto 
+class Objeto
 
 {
 protected:
