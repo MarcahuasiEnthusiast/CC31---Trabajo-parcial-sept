@@ -1,15 +1,16 @@
 #pragma once
 
+using namespace System::Drawing;
+using namespace System::Collections::Generic;
+
 #include "Objeto.hpp"
 #include "Municion.hpp"
 
 class ColeccionMunicion : public Municion
 {
-private:
 	list <Municion*>* Mu = new list <Municion*>;
-
+	
 public:
-
 	ColeccionMunicion()
 	{
 		for (int i = 0; i < 18; ++i)
@@ -45,11 +46,15 @@ public:
 
 	}
 
+	/*void hacertransparente(Bitmap^ sprite) {
+		Color color1 = sprite->GetPixel(0, 0);
+		sprite->MakeTransparent(color1);
+	}*/
 
 	void DibujarMunicion(BufferedGraphics^ bg)
 	{
 		Bitmap^ sprite;
-
+		//hacertransparente(sprite);
 		for (int i = 0; i < Mu->longitud(); ++i)
 		{
 			switch (Mu->obtenerPos(i)->gettipo())
@@ -80,7 +85,6 @@ public:
 		}
 	}
 
-
 	int cantidadMunicion()
 	{
 		return Mu->longitud();
@@ -94,7 +98,8 @@ public:
 
 	Rectangle RectanguloMun(int i)
 	{
-		return Rectangle(Mu->obtenerPos(i)->getx(), Mu->obtenerPos(i)->gety(), Mu->obtenerPos(i)->getancho(), Mu->obtenerPos(i)->getalto());
+		return Rectangle(Mu->obtenerPos(i)->getx(), Mu->obtenerPos(i)->gety(), Mu->obtenerPos(i)->getancho(), 
+			Mu->obtenerPos(i)->getalto());
 	}
 
 	Municion* ReturnMun(int l)

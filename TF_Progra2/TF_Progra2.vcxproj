@@ -137,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bala.hpp" />
+    <ClInclude Include="Colas.h" />
     <ClInclude Include="ColeccionBala.hpp" />
     <ClInclude Include="ColeccionEnemigos.hpp" />
     <ClInclude Include="Enemigo.hpp" />

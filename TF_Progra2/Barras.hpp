@@ -7,11 +7,12 @@
 #include "Bala.hpp"
 #include "Municion.hpp"
 #include "ColeccionBala.hpp"
+#include "Colas.h"
 
 class BarraMunicion : public Municion
 {
 private:
-	vector <Municion> Barra1;
+	 Cola<Municion>* Barra1 = new Cola<Municion>;
 	int X;
 	int Y;
 
@@ -24,11 +25,10 @@ public:
 
 	}
 
-
 	void Push(int T)
 	{
 
-		Barra1.push_back(Municion(X, Y, T));
+		Barra1->agregar(Municion(X, Y, T));
 
 		X += 30;
 
@@ -38,20 +38,20 @@ public:
 
 	int Pop()
 	{
-		return Barra1[0].gettipo();
+		return Barra1->remover();
 
 	}
 
 	void PopErase()
 	{
-		Barra1.erase(Barra1.begin());
+		Barra1->remover();
 
-		for (int i = 0; i < Barra1.size(); ++i)
+		for (int i = 0; i < Barra1->longitud(); ++i)
 		{
 			Barra1[i].setx(Barra1[i].getx() - 30);
 		}
 
-		if (Barra1.size() == 0)
+		if (Barra1->longitud() == 0)
 		{
 			X = 0;
 		}
@@ -67,9 +67,9 @@ public:
 		bg->Graphics->FillRectangle(Brushes::Aqua, 0, 0, MAX_X, 29);
 
 
-		for (int i = 0; i < Barra1.size(); ++i)
+		for (int i = 0; i < Barra1->longitud(); ++i)
 		{
-			switch (Barra1[i].gettipo())
+			switch (Barra1[i].peek())
 			{
 			case 1:
 				sprite = gcnew Bitmap("bala1.png");
@@ -91,7 +91,7 @@ public:
 
 	int TamañoBarra()
 	{
-		return Barra1.size();
+		return Barra1->longitud();
 	}
 
 
@@ -102,7 +102,7 @@ public:
 class BarraColeccion : public Municion
 {
 private:
-	vector <Municion> Barra2;
+	Cola <Municion>* Barra2 = new Cola<Municion>;
 	int X;
 	int Y;
 
@@ -119,7 +119,7 @@ public:
 	void Push(int T, int V)
 	{
 
-		Barra2.push_back(Municion(X, Y, T, V));
+		Barra2->agregar(Municion(X, Y, T, V));
 
 		X += 30;
 
@@ -129,10 +129,10 @@ public:
 
 	int Pop()
 	{
-		if (Barra2.size() != 0)
+		if (Barra2->longitud() != 0)
 		{
-			cout << Barra2[Barra2.size() - 1].getvida();
-			return Barra2[Barra2.size() - 1].getvida();
+			cout << Barra2[Barra2->longitud() - 1].getvida();
+			return Barra2[Barra2->longitud() - 1].getvida();
 
 		}
 
@@ -141,14 +141,14 @@ public:
 
 	void PopErase()
 	{
-		Barra2.erase(Barra2.end() - 1);
+		Barra2[Barra2->remover() - 1];
 
-		for (int i = 0; i > Barra2.size(); --i)
+		for (int i = 0; i > Barra2->longitud(); --i)
 		{
 			Barra2[i].setx(Barra2[i].getx() - 30);
 		}
 
-		if (Barra2.size() == 0)
+		if (Barra2->longitud() == 0)
 		{
 			X = 0;
 		}
@@ -162,9 +162,9 @@ public:
 		bg->Graphics->DrawRectangle(Pens::DarkBlue, 0, 30, MAX_X, 40);
 		bg->Graphics->FillRectangle(Brushes::Turquoise, 0, 30, MAX_X, 39);
 
-		for (int i = 0; i < Barra2.size(); ++i)
+		for (int i = 0; i < Barra2->longitud(); ++i)
 		{
-			switch (Barra2[i].gettipo())
+			switch (Barra2[i].peek())
 			{
 			case 4:
 				sprite = gcnew Bitmap("cora.png");
@@ -186,7 +186,7 @@ public:
 
 	int TamañoBarra2()
 	{
-		return Barra2.size();
+		return Barra2->longitud();
 	}
 
 
