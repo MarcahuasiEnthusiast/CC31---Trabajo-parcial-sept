@@ -3,7 +3,9 @@
 
 #include "FrmMenu.h"
 #include "FrmNivel1.h"
-
+#include "Personaje.hpp"
+#include "Objeto.hpp"
+#include <string>
 
 namespace TF_Progra2 {
 
@@ -178,6 +180,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 	}
 
 }
+		 //SALIR = GUARDAR
 private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
 	Application::Exit();
 }

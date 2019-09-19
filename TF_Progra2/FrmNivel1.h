@@ -160,6 +160,17 @@ namespace TF_Progra2 {
 			 }
 #pragma endregion
 	private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
+
+		//GUARDAR X, Y, DX, DY Y VIDAS DEL JUGADOR EN TODO MOMENTO
+		ofstream file("partida.tsv");
+		if (file.is_open()) {
+			file << Ju->getx() << " ";
+			file << Ju->gety() << " ";
+			file << Ju->getdx() << " ";
+			file << Ju->getdy() << " ";
+			file << Ju->getsalud() << " ";
+		}
+
 		if (CE->cantidadEnemigos() == 0)
 		{
 
@@ -199,7 +210,7 @@ namespace TF_Progra2 {
 			Ju->setc(0);
 		}
 
-
+		
 
 		tiempoDibujar();
 		nivelDibujar();
@@ -489,7 +500,7 @@ namespace TF_Progra2 {
 
 	}
 
-
+	
 
 	private: System::Void timer3_Tick(System::Object^ sender, System::EventArgs^ e) {
 		tiempo++;

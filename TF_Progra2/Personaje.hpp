@@ -33,6 +33,7 @@ public:
 				iss >> dx;
 				iss >> dy;
 				iss >> salud;
+				if (salud <= 0) salud = 1000;
 			}
 		}
 		else {
