@@ -28,10 +28,10 @@ public:
 	void Push(int T)
 	{
 
-		Barra1.push_back(Municion(X, Y,	T));
+		Barra1.push_back(Municion(X, Y, T));
 
 		X += 30;
-		
+
 
 	}
 
@@ -55,7 +55,7 @@ public:
 		{
 			X = 0;
 		}
-		
+
 	}
 
 	void DibujarBarra1(BufferedGraphics^ bg)
@@ -63,25 +63,25 @@ public:
 		Bitmap^ sprite;
 
 
-		bg->Graphics->DrawRectangle(Pens::DarkBlue,0, 0, MAX_X, 30);
+		bg->Graphics->DrawRectangle(Pens::DarkBlue, 0, 0, MAX_X, 30);
 		bg->Graphics->FillRectangle(Brushes::Aqua, 0, 0, MAX_X, 29);
 
 
 		for (int i = 0; i < Barra1.size(); ++i)
 		{
-			switch(Barra1[i].gettipo())
+			switch (Barra1[i].gettipo())
 			{
-				case 1:
-					sprite = gcnew Bitmap("bala1.png");
-					break;
-				case 2:
-					sprite = gcnew Bitmap("bala2.png");
-					break;
-				case 3:
-					sprite = gcnew Bitmap("bala3.png");
-					break;
+			case 1:
+				sprite = gcnew Bitmap("bala1.png");
+				break;
+			case 2:
+				sprite = gcnew Bitmap("bala2.png");
+				break;
+			case 3:
+				sprite = gcnew Bitmap("bala3.png");
+				break;
 
-				default:		break;
+			default:		break;
 			}
 
 			Barra1[i].dibujarMun(bg, sprite);
@@ -93,9 +93,9 @@ public:
 	{
 		return Barra1.size();
 	}
-	
 
-	
+
+
 };
 
 
@@ -132,10 +132,10 @@ public:
 		if (Barra2.size() != 0)
 		{
 			cout << Barra2[Barra2.size() - 1].getvida();
-			return Barra2[Barra2.size() -1].getvida();
+			return Barra2[Barra2.size() - 1].getvida();
 
 		}
-		
+
 
 	}
 
@@ -159,8 +159,8 @@ public:
 	{
 		Bitmap^ sprite;
 
-		bg->Graphics->DrawRectangle(Pens::DarkBlue, 0, 30, MAX_X,40 );
-		bg->Graphics->FillRectangle(Brushes::Turquoise, 0, 30, MAX_X,39 );
+		bg->Graphics->DrawRectangle(Pens::DarkBlue, 0, 30, MAX_X, 40);
+		bg->Graphics->FillRectangle(Brushes::Turquoise, 0, 30, MAX_X, 39);
 
 		for (int i = 0; i < Barra2.size(); ++i)
 		{
