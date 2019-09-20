@@ -6,7 +6,7 @@
 class ColeccionMunicion : public Municion
 {
 private:
-	list <Municion*> * Mu = new list <Municion*>;
+	list <Municion*>* Mu = new list <Municion*>;
 
 public:
 
@@ -24,21 +24,21 @@ public:
 		{
 			for (int i = 0; i < 18; ++i)
 			{
-				Mu->agregaInicial( new Municion());
+				Mu->agregaInicial(new Municion());
 			}
 		}
 		else if (niv == 2)
 		{
 			for (int i = 0; i < 20; ++i)
 			{
-				Mu->agregaInicial( new Municion());
+				Mu->agregaInicial(new Municion());
 			}
 		}
 		else if (niv == 3)
 		{
 			for (int i = 0; i < 22; ++i)
 			{
-				Mu->agregaInicial( new Municion());
+				Mu->agregaInicial(new Municion());
 			}
 		}
 

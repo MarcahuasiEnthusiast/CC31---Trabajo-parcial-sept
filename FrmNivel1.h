@@ -40,6 +40,10 @@ namespace TF_Progra2 {
 			nivel = 1;
 			tiempo = 0;
 			clasebala = 1;
+			
+			XB1 = 0;
+			XB2 = 0;
+
 
 			Ju = new Jugador();
 			CE = new ColeccionEnemigos();
@@ -85,7 +89,7 @@ namespace TF_Progra2 {
 
 		Rectangle Rv;
 
-		int nivel, tiempo, clasebala, velP, velPn;
+		int nivel, tiempo, clasebala, velP, velPn, XB1, XB2;
 
 
 
@@ -160,6 +164,17 @@ namespace TF_Progra2 {
 			 }
 #pragma endregion
 	private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
+
+		//GUARDAR X, Y, DX, DY Y VIDAS DEL JUGADOR EN TODO MOMENTO
+		ofstream file("partida.tsv");
+		if (file.is_open()) {
+			file << Ju->getx() << " ";
+			file << Ju->gety() << " ";
+			file << Ju->getdx() << " ";
+			file << Ju->getdy() << " ";
+			file << Ju->getsalud() << " ";
+		}
+
 		if (CE->cantidadEnemigos() == 0)
 		{
 
@@ -199,7 +214,7 @@ namespace TF_Progra2 {
 			Ju->setc(0);
 		}
 
-
+		
 
 		tiempoDibujar();
 		nivelDibujar();
@@ -207,6 +222,16 @@ namespace TF_Progra2 {
 		if (CM->cantidadMunicion() == 0)
 		{
 			CM->crearColeccionMun(nivel);
+		}
+
+		if (BM->returnB1()->getLen() == 0)
+		{
+			XB1 = 0;
+		}
+
+		if (BC->returnB2()->getLen() == 0)
+		{
+			XB2 = 0;
 		}
 
 		CM->DibujarMunicion(bg);
@@ -274,8 +299,8 @@ namespace TF_Progra2 {
 		{
 			if (BC->TamañoBarra2() != 0)
 			{
-				Ju->setsalud(Ju->getsalud() + BC->Pop());
-				BC->PopErase();
+				Ju->setsalud(Ju->getsalud() + BC->returnB2()->top()->getvida());
+				BC->returnB2()->pop();
 			}
 		}
 
@@ -310,8 +335,8 @@ namespace TF_Progra2 {
 	private: System::Void panel1_MouseClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 		if (BM->TamañoBarra() != 0)
 		{
-			CB->CrearBala(BM->Pop(), Ju->getx() + Ju->getanchoI() / 2, Ju->gety() + Ju->getaltoI() / 2, nivel);
-			BM->PopErase();
+			CB->CrearBala(BM->returnB1()->top()->gettipo(), Ju->getx() + Ju->getanchoI() / 2, Ju->gety() + Ju->getaltoI() / 2, nivel);
+			BM->returnB1()->pop();
 			CB->SetAngulos(e->X, e->Y);
 		}
 
@@ -489,7 +514,7 @@ namespace TF_Progra2 {
 
 	}
 
-
+	
 
 	private: System::Void timer3_Tick(System::Object^ sender, System::EventArgs^ e) {
 		tiempo++;
@@ -558,33 +583,32 @@ namespace TF_Progra2 {
 			 ////////////////////////////////////////////////////
 
 
-			 void ImpactoMunicion()
+		 void ImpactoMunicion()
+		 {
+			 for (int i = 0; i < CM->cantidadMunicion(); i++)
 			 {
-				 for (int i = 0; i < CM->cantidadMunicion(); i++)
+				 if (CM->RectanguloMun(i).IntersectsWith(Ju->RectanguloJu()) && (CM->ReturnMun(i)->gettipo() > 0 && CM->ReturnMun(i)->gettipo() <= 3))
 				 {
-					 if (CM->RectanguloMun(i).IntersectsWith(Ju->RectanguloJu()) && (CM->ReturnMun(i)->gettipo() > 0 && CM->ReturnMun(i)->gettipo() <= 3))
-					 {
 
-						 BM->Push(CM->ReturnMun(i)->gettipo());
-						 CM->EliminarMun(i);
+					 BM->returnB1()->push(new Municion(XB1,0,CM->ReturnMun(i)->gettipo()));
+					 XB1 += 30;
+					 CM->EliminarMun(i);
 
-					 }
-					 if (CM->RectanguloMun(i).IntersectsWith(Ju->RectanguloJu()) && (CM->ReturnMun(i)->gettipo() > 3 && CM->ReturnMun(i)->gettipo() <= 6))
-					 {
-
-						 BC->Push(CM->ReturnMun(i)->gettipo(), CM->ReturnMun(i)->getvida());
-						 CM->EliminarMun(i);
-
-					 }
 				 }
+				 if (CM->RectanguloMun(i).IntersectsWith(Ju->RectanguloJu()) && (CM->ReturnMun(i)->gettipo() > 3 && CM->ReturnMun(i)->gettipo() <= 6))
+				 {
 
+					 BC->returnB2()->push(new Municion(XB2, 31, CM->ReturnMun(i)->gettipo(), CM->ReturnMun(i)->getvida()));
+					 XB2 += 30;
+					 CM->EliminarMun(i);
 
-
+				 }
 			 }
 
+		 }
 
 
-
+	
 
 	};
 }
