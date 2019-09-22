@@ -22,7 +22,7 @@ public:
 	{
 		Bitmap^ sprite = gcnew Bitmap("Goku1.png");
 		
-		//LEER ARCHIVO
+		//LEER ARCHIVO 
 		ifstream file("partida.tsv");
 		if (file.is_open()) {
 			string line;
