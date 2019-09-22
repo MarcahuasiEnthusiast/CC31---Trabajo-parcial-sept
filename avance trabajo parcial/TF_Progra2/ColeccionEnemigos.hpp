@@ -16,10 +16,10 @@ public:
 
 	ColeccionEnemigos()
 	{
-		for (int i = 0; i < 6; ++i)
+		/*for (int i = 0; i < 6; ++i)
 		{
 			En->agregaInicial(new Enemigo());
-		}
+		}*/
 	}
 
 	void crearColeccionEnemigos(int niv)

@@ -3,6 +3,7 @@
 #include<sstream>
 #include<string>
 #include "Objeto.hpp"
+#include<functional>
 
 class Jugador : public Objeto
 {
@@ -33,7 +34,19 @@ public:
 				iss >> dx;
 				iss >> dy;
 				iss >> salud;
-				if (salud <= 0) salud = 1000;
+				if (salud <= 0) salud = 500;
+				iss >> nivel;
+				
+				//cuandro crashea con getx() se setearon los siguientes atributos
+				if (x <= -2000) {
+					x = 300;
+					y = 300;
+					dx = -7;
+					dy = -7;
+					nivel = 1;
+				}
+
+				if (nivel < 0 || nivel > 4) nivel = 1;
 			}
 		}
 		else {
@@ -95,6 +108,7 @@ public:
 	int getsalud() { return salud; }
 	int getancho() { return ancho; }
 	int getalto() { return alto; }
+	int getnivel() { return nivel; }
 
 	void setancho(int ancho) { this->ancho = ancho; }
 	void setalto(int alto) { this->alto = alto; }
