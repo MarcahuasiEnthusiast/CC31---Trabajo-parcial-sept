@@ -140,7 +140,7 @@ namespace TF_Progra2 {
 				 // panel1
 				 // 
 				 this->panel1->Location = System::Drawing::Point(0, 0);
-				 this->panel1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+				 this->panel1->Margin = System::Windows::Forms::Padding(4);
 				 this->panel1->Name = L"panel1";
 				 this->panel1->Size = System::Drawing::Size(1697, 1010);
 				 this->panel1->TabIndex = 0;
@@ -149,11 +149,13 @@ namespace TF_Progra2 {
 				 // 
 				 // timer2
 				 // 
+				 this->timer2->Enabled = true;
 				 this->timer2->Interval = 4200;
 				 this->timer2->Tick += gcnew System::EventHandler(this, &FrmNivel1::timer2_Tick);
 				 // 
 				 // timer3
 				 // 
+				 this->timer3->Enabled = true;
 				 this->timer3->Interval = 1000;
 				 this->timer3->Tick += gcnew System::EventHandler(this, &FrmNivel1::timer3_Tick);
 				 // 
@@ -163,7 +165,7 @@ namespace TF_Progra2 {
 				 this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 				 this->ClientSize = System::Drawing::Size(1699, 1010);
 				 this->Controls->Add(this->panel1);
-				 this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+				 this->Margin = System::Windows::Forms::Padding(4);
 				 this->Name = L"FrmNivel1";
 				 this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 				 this->Text = L"FrmNivel1";

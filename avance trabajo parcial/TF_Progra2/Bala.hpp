@@ -34,7 +34,7 @@ public:
 			dy = 7;
 			ancho = 25;
 			alto = 25;
-			daño = 1000;
+			daño = 15;
 		}
 		else if (type == 2)
 		{
@@ -42,7 +42,7 @@ public:
 			dy = 9;
 			ancho = 20;
 			alto = 20;
-			daño = 1000;
+			daño = 10;
 		}
 		else if (type == 3)
 		{
@@ -50,7 +50,7 @@ public:
 			dy = 12;
 			ancho = 15;
 			alto = 15;
-			daño = 1000;
+			daño = 5;
 		}
 		else if (type == 4)
 		{
@@ -59,7 +59,7 @@ public:
 			dy = 10;
 			ancho = 20;
 			alto = 20;
-			daño = 1000;
+			daño = 5 + 10 * (nivel - 1);
 		}
 		else if (type == 5)
 		{
@@ -68,7 +68,7 @@ public:
 			dy = 8;
 			ancho = 30;
 			alto = 30;
-			daño = 1000;
+			daño = 20 + 15 * (nivel - 1);
 		}
 		hitbox = Rectangle(x, y, ancho, alto);
 	}
