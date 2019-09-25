@@ -113,7 +113,8 @@ public:
 	}
 
 	void eliminaPos(int pos) {
-		if (pos < 0 || pos >= len) return;
+		cout <<  pos;
+		if (pos < 0 || pos > len) return;
 		if (pos == 0) {
 			eliminarInicial();
 		}
@@ -128,6 +129,8 @@ public:
 
 			delete aux2;
 			--len;
+			
 		}
+	
 	}
 };
