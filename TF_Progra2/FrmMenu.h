@@ -160,7 +160,14 @@ namespace TF_Progra2 {
 		
 
 	private: System::Void FrmMenu_Load(System::Object^  sender, System::EventArgs^  e) {
-		
+		ofstream file("partida.tsv");
+		if (file.is_open()) {
+			file << 640 << " ";
+			file << 420 << " ";
+			file << 5 << " ";
+			file << 5 << " ";
+			file << 1200 << " ";
+		}
 	}
 
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {

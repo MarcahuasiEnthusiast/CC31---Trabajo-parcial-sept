@@ -8,10 +8,10 @@
 #include <functional>
 
 #define MAX_X 1280
-#define MAX_Y 840
+#define MAX_Y 800
 
-#define MIN_X 2
-#define MIN_Y 60
+#define MIN_X 0
+#define MIN_Y 80
 
 using namespace std;
 using namespace System;

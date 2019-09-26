@@ -34,7 +34,7 @@ public:
 			dy = 7;
 			ancho = 25;
 			alto = 25;
-			daño = 15;
+			daño = 170;
 		}
 		else if (type == 2)
 		{
@@ -42,7 +42,7 @@ public:
 			dy = 9;
 			ancho = 20;
 			alto = 20;
-			daño = 10;
+			daño = 120;
 		}
 		else if (type == 3)
 		{
@@ -50,7 +50,7 @@ public:
 			dy = 12;
 			ancho = 15;
 			alto = 15;
-			daño = 5;
+			daño = 80;
 		}
 		else if (type == 4)
 		{

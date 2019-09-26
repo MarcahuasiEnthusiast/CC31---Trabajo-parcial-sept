@@ -40,9 +40,7 @@ namespace TF_Progra2 {
 			nivel = 1;
 			tiempo = 0;
 			clasebala = 1;
-			
-			XB1 = 0;
-			XB2 = 0;
+	
 
 
 			Ju = new Jugador();
@@ -89,7 +87,7 @@ namespace TF_Progra2 {
 
 		Rectangle Rv;
 
-		int nivel, tiempo, clasebala, velP, velPn, XB1, XB2;
+		int nivel, tiempo, clasebala, velP, velPn;
 
 
 
@@ -224,19 +222,8 @@ namespace TF_Progra2 {
 			CM->crearColeccionMun(nivel);
 		}
 
-		if (BM->returnB1()->getLen() == 0)
-		{
-			XB1 = 0;
-		}
 
-		if (BC->returnB2()->getLen() == 0)
-		{
-			XB2 = 0;
-		}
-
-		CM->DibujarMunicion(bg);
-		BM->DibujarBarra1(bg);
-		BC->DibujarBarra2(bg);
+	
 
 
 		CB->MoverBalas();
@@ -249,9 +236,15 @@ namespace TF_Progra2 {
 		ImpactoMunicion();
 		ImpactoBala();
 		ImpactoEnemigo();
-		CE->destruir(Ju);
 
+
+		CE->destruir(Ju);
 		Ju->DibujarJ(bg);
+
+		CM->DibujarMunicion(bg);
+		BM->DibujarBarra1(bg);
+		BC->DibujarBarra2(bg);
+
 
 		bg->Render(gra);
 
@@ -590,18 +583,26 @@ namespace TF_Progra2 {
 				 if (CM->RectanguloMun(i).IntersectsWith(Ju->RectanguloJu()) && (CM->ReturnMun(i)->gettipo() > 0 && CM->ReturnMun(i)->gettipo() <= 3))
 				 {
 
-					 BM->returnB1()->push(new Municion(XB1,0,CM->ReturnMun(i)->gettipo()));
-					 XB1 += 30;
-					 CM->EliminarMun(i);
+					 BM->returnB1()->push(new Municion(0,0,CM->ReturnMun(i)->gettipo()));
+					 
+					 CM->ReturnMun(i)->setenbarra(1);
 
 				 }
 				 if (CM->RectanguloMun(i).IntersectsWith(Ju->RectanguloJu()) && (CM->ReturnMun(i)->gettipo() > 3 && CM->ReturnMun(i)->gettipo() <= 6))
 				 {
 
-					 BC->returnB2()->push(new Municion(XB2, 31, CM->ReturnMun(i)->gettipo(), CM->ReturnMun(i)->getvida()));
-					 XB2 += 30;
-					 CM->EliminarMun(i);
+					 BC->returnB2()->push(new Municion(0, 31, CM->ReturnMun(i)->gettipo(), CM->ReturnMun(i)->getvida()));
+					 
+					 CM->ReturnMun(i)->setenbarra(1);
 
+				 }
+			 }
+
+			 for (int i = 0; i < CM->cantidadMunicion(); i++)
+			 {
+				 if (CM->ReturnMun(i)->getbarra() == 1)
+				 {
+					 CM->EliminarMun(i);
 				 }
 			 }
 

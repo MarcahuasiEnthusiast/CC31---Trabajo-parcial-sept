@@ -35,8 +35,8 @@ public:
 		Bitmap^ sprite;
 
 
-		bg->Graphics->DrawRectangle(Pens::DarkBlue, 0, 0, MAX_X, 30);
-		bg->Graphics->FillRectangle(Brushes::Aqua, 0, 0, MAX_X, 29);
+		bg->Graphics->DrawRectangle(Pens::DarkBlue, 0, 0, 50, 30);
+		bg->Graphics->FillRectangle(Brushes::Aqua, 0, 0, 50, 29);
 
 
 		for (int i = 0; i < Barra1->getLen(); ++i)
@@ -97,8 +97,8 @@ public:
 	{
 		Bitmap^ sprite;
 
-		bg->Graphics->DrawRectangle(Pens::DarkBlue, 0, 30, MAX_X, 40);
-		bg->Graphics->FillRectangle(Brushes::Turquoise, 0, 30, MAX_X, 39);
+		bg->Graphics->DrawRectangle(Pens::DarkBlue, 0, 30, 50, 40);
+		bg->Graphics->FillRectangle(Brushes::Turquoise, 0, 30, 50, 39);
 
 		for (int i = 0; i < Barra2->getLen(); ++i)
 		{

@@ -50,22 +50,13 @@
     <ClInclude Include="Enemigo.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Colas.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Barras.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cola.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ColeccionMunicion.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Lista.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Listas.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Municion.hpp">
